@@ -1,0 +1,10 @@
+#数据库连接
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 39.108.110.35:8848
+  #redis
+  redis:
+    host: localhost
+    port: 6379

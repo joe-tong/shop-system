@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 继承说明：这里继承 SpringBoot 提供的父工程 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>link.net.shop.system</groupId>
+    <artifactId>shop-system</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>shop-system</name>
+
+    <!-- 打包方式 -->
+    <packaging>pom</packaging>
+
+    <!-- 属性说明 -->
+    <properties>
+        <shop.version>0.0.1-SNAPSHOT</shop.version>
+        <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+        <swagger.version>2.9.2</swagger.version>
+        <guava.version>29.0-jre</guava.version>
+        <lombok.version>1.18.12</lombok.version>
+        <mysql.version>8.0.19</mysql.version>
+        <druid.version>1.0.26</druid.version>
+    </properties>
+
+    <!-- 模块说明：这里声明多个子模块 -->
+    <modules>
+        <module>shop-common</module>
+        <module>shop-gateway</module>
+        <module>shop-order</module>
+        <module>shop-user</module>
+        <module>shop-user-api</module>
+        <module>shop-product</module>
+        <module>shop-mq</module>
+        <module>shop-security</module>
+    </modules>
+
+    <!-- 子模块全部引入 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!--jar 版本管理，不实际引入    -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 模块版本管理 -->
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-common</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-order</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-gateway</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-user</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-user-api</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-product</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-mq</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-security</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--整合spring cloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--整合spring cloud alibaba-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

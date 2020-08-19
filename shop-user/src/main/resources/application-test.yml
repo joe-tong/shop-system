@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.113.91.40:8848
+    #redis
+  redis:
+    host: localhost
+    port: 6379
+
+

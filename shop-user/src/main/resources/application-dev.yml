@@ -1,0 +1,49 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.106.66.5:8848
+  zipkin:
+    base-url: http://47.106.66.5:9411
+  sleuth:
+    sampler:
+      percentage: 1.0 #数据收集率，1.0代表收集100%数据
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    primary:
+      url: jdbc:mysql://47.106.66.5:3306/shop-user?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+      username: bnb_system
+      password: bnb_system
+    secondary:
+      url: jdbc:mysql://447.106.66.5:3306/shop-admin?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+      username: bnb_system
+      password: bnb_system
+
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #dataSource Pool configuration
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    exceptionSorter: true
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    useGlobalDataSourceStat: true
+  jpa:
+    hibernate:
+      ddl-auto: update  # 第一次建表create  后面用update，要不然每次重启都会新建表
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+
+
+

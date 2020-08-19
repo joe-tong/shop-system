@@ -1,0 +1,33 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.106.66.5:8848
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+      routes:
+        - id: order-server
+          uri: lb://order-server
+          predicates:
+          - Path=/order/**
+        - id: user-server
+          uri: lb://user-server
+          predicates:
+          - Path=/user/**
+        - id: product-server
+            uri: lb://product-server
+            predicates:
+            - Path=/product/**
+        - id: mq-server
+            uri: lb://mq-server
+            predicates:
+            - Path=/mq/**
+
+  zipkin:
+    base-url: http://47.106.66.5:9411
+  sleuth:
+    sampler:
+      percentage: 1.0 #数据收集率，1.0代表收集100%数据

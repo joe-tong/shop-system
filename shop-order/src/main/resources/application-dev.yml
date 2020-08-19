@@ -1,0 +1,13 @@
+spring:
+  zipkin:
+    base-url: http://47.106.66.5:9411
+  sleuth:
+    sampler:
+      percentage: 1.0 #数据收集率，1.0代表收集100%数据
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.106.66.5:8848
+
+
+
