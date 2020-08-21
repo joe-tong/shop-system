@@ -1,0 +1,17 @@
+server:
+  port: 6101
+  servlet:
+    context-path: /client-user
+
+spring:
+  application:
+    name: auth-client
+  profiles:
+    active: dev
+
+
+
+
+
+
+
