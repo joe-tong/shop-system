@@ -4,11 +4,14 @@
 ```
 shop-system  父工程模块:管理依赖
   --shop-common 公共模块：提供公共数据和功能
-  --shop-user 用户模块  (双数据源)
+  --shop-user 用户模块  (双数据源)：2001
   --shop-user-api 用户对外提供feign api
-  --shop-order 订单模块 
-  --shop-product 产品模块 （es集群）
-  --shop-mq 消息通知（kafka,rocketmq,rabbitmq）
+  --shop-order 订单模块：3002
+  --shop-product 产品模块 （es集群）：4001
+  --shop-mq 消息通知（kafka,rocketmq,rabbitmq）：5001
+  --shop-gateway 网关(oauth 认证、鉴权)：1001
+  --shop-oauth2-server: 认证服务：6001
+  --shop-oauth2-client: 资源服务（内测）：6101
 ```
 
 ## 涉及技术

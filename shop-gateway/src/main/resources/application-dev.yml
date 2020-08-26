@@ -18,13 +18,17 @@ spring:
           predicates:
           - Path=/user/**
         - id: product-server
-            uri: lb://product-server
-            predicates:
-            - Path=/product/**
+          uri: lb://product-server
+          predicates:
+          - Path=/product/**
         - id: mq-server
-            uri: lb://mq-server
-            predicates:
-            - Path=/mq/**
+          uri: lb://mq-server
+          predicates:
+          - Path=/mq/**
+        - id: auth-server
+          uri: lb://auth-server
+          predicates:
+          - Path=/oauth/**
 
   zipkin:
     base-url: http://47.106.66.5:9411

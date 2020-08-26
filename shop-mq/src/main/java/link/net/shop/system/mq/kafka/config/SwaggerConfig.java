@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 .produces(Sets.newHashSet("application/json;charset=UTF-8"))
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("link.net.shop.system.mq.kafka.controller"))
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
                 .globalOperationParameters(parameter());

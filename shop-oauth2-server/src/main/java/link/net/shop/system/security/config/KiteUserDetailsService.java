@@ -1,24 +1,37 @@
 package link.net.shop.system.security.config;
 
-import link.net.shop.system.security.bean.User;
-import link.net.shop.system.security.repository.UserRepository;
+import com.alibaba.fastjson.JSON;
+import link.net.shop.system.security.role.domin.TulingUser;
+import link.net.shop.system.security.role.entity.SysPermission;
+import link.net.shop.system.security.role.entity.SysUser;
+import link.net.shop.system.security.role.mapper.SysUserMapper;
+import link.net.shop.system.security.role.service.ISysPermissionService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component(value = "kiteUserDetailsService")
 public class KiteUserDetailsService implements UserDetailsService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
+    private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private ISysPermissionService sysPermissionService;
 
     /**
      * Security的登录，User赋予权限
@@ -29,21 +42,24 @@ public class KiteUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (StringUtils.isBlank(username)) {
-            throw new UsernameNotFoundException("the username is not null");
-        }
-        //校验用户是否存在
-        User user = userRepository.getById(username);
-        if (null == user){
-            throw new UsernameNotFoundException("the user is not exist");
+        SysUser sysUser = sysUserMapper.findByUserName(username);
+
+        if(null == sysUser) {
+            log.warn("根据用户名:{}查询用户信息为空",username);
+            throw new UsernameNotFoundException(username);
         }
 
-        //给用户添加角色权限
-        String role = user.getRole();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role));
+        List<SysPermission> sysPermissionList = sysPermissionService.findByUserId(sysUser.getId());
 
-        //返回用户token
-        return new org.springframework.security.core.userdetails.User(username, user.getOauthpassword(), authorities);
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(sysPermissionList)) {
+            for (SysPermission sysPermission : sysPermissionList) {
+                authorityList.add(new SimpleGrantedAuthority(sysPermission.getUri()));
+            }
+        }
+
+        TulingUser tulingUser = new TulingUser(sysUser.getUsername(),passwordEncoder.encode(sysUser.getPassword()),authorityList);
+        log.info("用户登陆成功:{}", JSON.toJSONString(tulingUser));
+        return tulingUser;
     }
 }

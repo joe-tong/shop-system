@@ -22,6 +22,6 @@ public class OAuth2PasswordTest {
     @Test
     public  void passwordEncode() {
         //secret
-        System.out.println(passwordEncoder.encode("user-secret-8888"));
+        System.out.println(passwordEncoder.encode("api-gateway-secret"));
     }
 }

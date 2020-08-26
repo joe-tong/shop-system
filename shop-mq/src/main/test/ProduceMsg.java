@@ -1,5 +1,4 @@
 import link.net.shop.system.MqSystemApplication;
-import link.net.shop.system.mq.kafka.constant.Topic;
 import link.net.shop.system.mq.kafka.producer.KafKaConsumerProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;

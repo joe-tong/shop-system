@@ -56,56 +56,58 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         return tokenService;
     }
 
-//    @Override
-//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-//        resources.tokenServices(tokenService());
-//    }
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.tokenServices(tokenService())
+                .resourceId("client-resourceId");
+    }
 
     /**
      * 访问受保护的资源时，要具有哪里权限。
+     *
      * @param http
      * @throws Exception
      */
-//    @Override
-//    public void configure(HttpSecurity http) throws Exception {
-//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//                .and().requestMatchers()
-//                .anyRequest()
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers (
-//                HttpMethod.GET,
-//                "/",
-//                "/*.html",
-//                "/favicon.ico",
-//                "/**/*.html",
-//                "/**/*.css",
-//                "/**/*.js",
-//                "/webjars/**",
-//                "/swagger-resources/**",
-//                "/*/api-docs"
-//                ).permitAll();
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and().requestMatchers()
+                .anyRequest()
+                .and()
+                .authorizeRequests()
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/",
+                        "/*.html",
+                        "/favicon.ico",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/webjars/**",
+                        "/swagger-resources/**",
+                        "/*/api-docs"
+                ).permitAll();
+    }
+
+//    @Bean
+//    public TokenStore jwtTokenStore() {
+//        return new JwtTokenStore(jwtAccessTokenConverter());
 //    }
 
-    @Bean
-    public TokenStore jwtTokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
-    }
+//    @Bean
+//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+//        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+//
+//        accessTokenConverter.setSigningKey("dev");
+//        accessTokenConverter.setVerifierKey("dev");
+//        return accessTokenConverter;
+//    }
+//
+//    @Autowired
+//    private TokenStore jwtTokenStore;
 
-    @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-
-        accessTokenConverter.setSigningKey("dev");
-        accessTokenConverter.setVerifierKey("dev");
-        return accessTokenConverter;
-    }
-
-    @Autowired
-    private TokenStore jwtTokenStore;
-
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenStore(jwtTokenStore);
-    }
+//    @Override
+//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+//        resources.tokenStore(jwtTokenStore);
+//    }
 }
