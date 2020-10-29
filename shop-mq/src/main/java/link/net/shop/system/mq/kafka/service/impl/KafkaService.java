@@ -29,6 +29,7 @@ public class KafkaService {
 
     @KafkaListener(topics = "#{kafkaTopicName}", groupId = "#{topicGroupId}")
     public void processMessage(ConsumerRecord<Integer, String> record) {
+
         log.info("kafka processMessage start");
         log.info("processMessage, topic = {}, msg = {}", record.topic(), record.value());
 
@@ -40,6 +41,7 @@ public class KafkaService {
     public void sendMessage(String topic, String data) {
         log.info("kafka sendMessage start");
         ListenableFuture<SendResult<Integer, String>> future = kafkaTemplate.send(topic, data);
+
         future.addCallback(new ListenableFutureCallback<SendResult<Integer, String>>() {
             @Override
             public void onFailure(Throwable ex) {

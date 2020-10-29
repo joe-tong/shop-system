@@ -7,7 +7,7 @@ shop-system  父工程模块:管理依赖
   --shop-user 用户模块  (双数据源)：2001
   --shop-user-api 用户对外提供feign api
   --shop-order 订单模块：3002
-  --shop-product 产品模块 （es集群）：4001
+  --shop-product 产品模块 （es集群、秒杀）：4001
   --shop-mq 消息通知（kafka,rocketmq,rabbitmq）：5001
   --shop-gateway 网关(oauth 认证、鉴权)：1001
   --shop-oauth2-server: 认证服务：6001
@@ -18,10 +18,11 @@ shop-system  父工程模块:管理依赖
 
 ### 1.spring-cloud:
 
-- nacos注册中心，未使用配置中心
--  gateway 微服务网关
+- nacos注册中心、配置中心
+- gateway 微服务网关
 - feign  微服务http调用
 - sleuth+zipkin 微服务追踪链
+- sentinel 限流熔断器
 
 #### 2.jpa双数据切换
 
@@ -29,13 +30,14 @@ shop-system  父工程模块:管理依赖
 
 - ehcache 
 - redis
-- mongdb
+- mongodb
 
 #### 4.elasticsearch 
 
 spring-boot-starter-data 整合 elasticsearch 集群使用使用
 
-#### 5.kafka
+#### 5.消息中间件
+-kafka 、rabbitmq、rocketmq
 
 问题：
 
@@ -47,6 +49,14 @@ spring-boot-starter-data 整合 elasticsearch 集群使用使用
 
   **代码里面有解决方案**
 
+#### 6.分布式session
+spring-session
+
+#### 7.分布式锁
+redission
+
+#### 8.布隆过滤器
+guava.boom
 
 
 #### 玩的过程中发现的问题

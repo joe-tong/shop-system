@@ -1,4 +1,4 @@
-package link.net.shop.system.mq.kafka.config;
+package link.net.shop.system.mq.config;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

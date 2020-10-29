@@ -1,0 +1,22 @@
+server:
+  port: 5001
+  servlet:
+    context-path: /mq
+
+spring:
+  application:
+    name: mq-server
+  #ehcache
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:config/ehcache.xml
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.66.5:8848
+        file-extension: yaml
+      discovery:
+        server-addr: 192.168.66.5:8848
