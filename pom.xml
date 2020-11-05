@@ -41,6 +41,7 @@
         <module>shop-oauth2-server</module>
         <module>shop-oauth2-client</module>
         <module>shop-net</module>
+        <module>shop-seckill</module>
     </modules>
 
     <!-- 子模块全部引入 -->
@@ -129,6 +130,11 @@
                 <version>${shop.version}</version>
             </dependency>
             <dependency>
+                <groupId>link.net.shop.system</groupId>
+                <artifactId>shop-seckill</artifactId>
+                <version>${shop.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${spring-boot.version}</version>
@@ -146,6 +152,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-test</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>

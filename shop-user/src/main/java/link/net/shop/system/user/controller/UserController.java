@@ -61,8 +61,10 @@ public class UserController {
         admin.setName(request.getName());
         admin.setTel(request.getTel());
         shopAdminUserRepository.save(admin);
+        int i = 1;
+        i = 1 / 0;
 
-        return  ServerResponse.success();
+        return ServerResponse.success();
     }
 
     @PostMapping("create/user")
@@ -73,6 +75,6 @@ public class UserController {
         shopUser.setIdCard(request.getIdCard());
         userRepository.save(shopUser);
 
-        return  ServerResponse.success();
+        return ServerResponse.success();
     }
 }

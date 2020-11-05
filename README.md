@@ -1,4 +1,4 @@
-# Shop-system电商系统整合技术栈
+# Shop-system电商系统技术栈-仅供学习Demo
 ## 目录结构
 
 ```
@@ -7,11 +7,13 @@ shop-system  父工程模块:管理依赖
   --shop-user 用户模块  (双数据源)：2001
   --shop-user-api 用户对外提供feign api
   --shop-order 订单模块：3002
-  --shop-product 产品模块 （es集群、秒杀）：4001
+  --shop-product 产品模块 （es集群、秒杀、缓存击穿、sentinel、seata分布式事务）：4001
   --shop-mq 消息通知（kafka,rocketmq,rabbitmq）：5001
   --shop-gateway 网关(oauth 认证、鉴权)：1001
   --shop-oauth2-server: 认证服务：6001
   --shop-oauth2-client: 资源服务（内测）：6101
+  --shop-net: 网络服务（netty）：7001
+  --shop-seckill: 秒杀服务（）：8001
 ```
 
 ## 涉及技术
@@ -54,10 +56,17 @@ spring-session
 
 #### 7.分布式锁
 redission
+#
+### 8.布隆过滤器-缓存击穿
+bloomFilter 过滤不存在的商品：
+1.LocalBloomFilter
+2.Redis的bitMap
 
-#### 8.布隆过滤器
-guava.boom
+### 8.sentinel
+1.熔断
+2.限流
 
+### 9.seata分布式事务
 
 #### 玩的过程中发现的问题
 

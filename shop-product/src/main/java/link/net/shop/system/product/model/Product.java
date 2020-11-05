@@ -27,10 +27,5 @@ public class Product  {
     private String subTitle;
     private String keywords;
 
-    public Product(Long id, String name, String subTitle, String keywords) {
-        this.id = id;
-        this.name = name;
-        this.subTitle = subTitle;
-        this.keywords = keywords;
-    }
+
 }

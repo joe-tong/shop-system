@@ -9,13 +9,64 @@ spring:
   profiles:
     active: dev
   cloud:
+    #nacos配置
     nacos:
       config:
         server-addr: 192.168.66.5:8848
         file-extension: yaml
       discovery:
         server-addr: 192.168.66.5:8848
+    #sentinel配置
+    sentinel:
+      transport:
+        # 指定sentinel控制台地址
+        dashboard: 192.168.66.5:8858
+        # 指定和控制台通信的IP，若不配置，会自动选择一个IP注册
+        client-ip: 127.0.0.1
+        # 指定和控制台通信的端口哦，默认值8719
+        # 若不配置，会自动扫猫从8719开始扫猫，依次+1，知道值找到未被占用的端口
+        port: 8719
+        # 心跳发送周期，默认值null
+        # 但在SimpleHttpHeartbeatSender会用默认值10秒
+        heartbeat-interval-ms: 10000
 
+    #seata配置
+#    alibaba:
+#      seata:
+#       tx-service-group: fsp_tx_group
+#zookeeper配置
 zookeeper:
   address: 192.168.66.5:2181
   timeout: 4000
+
+seata:
+  # 开启自动装配
+  enabled: true
+  # 本客户端的微服务名称
+  application-id: seata-product-server
+  # 读取哪个事务分组
+  # 例如此时会读取 SEATA_GROUP 这个分组下的 service.vgroupMapping.fsp_tx_group 这个属性的值。从上面的配置可以知道笔者此处的最终值为 testCluster。后面程序运行会找到 testCluster 这个集群的seata服务端，进行通讯。
+  tx-service-group: fsp_tx_group
+  service:
+    vgroup-mapping:
+      fsp_tx_group: default
+    grouplist:
+      default: 192.168.66.5:8091
+  # 配置中心设置
+  config:
+    type: file
+    file:
+      name: file.conf
+  # 注册中心设置
+  registry:
+    type: nacos
+    nacos:
+      # SEATA服务中心的微服务名，此处与服务端保持一致
+      application: seata-server
+      server-addr: 192.168.66.5:8848
+      username: nacos
+      password: nacos
+  client:
+    support:
+      spring:
+       datasource-autoproxy: true
